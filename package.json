@@ -1,0 +1,27 @@
+{
+  "name": "aws-scripts",
+  "version": "1.0.0",
+  "description": "Utility scripts for interacting with AWS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/douglasnaphas/aws-scripts.git"
+  },
+  "keywords": [
+    "AWS",
+    "JavaScript"
+  ],
+  "author": "Douglas Naphas <douglasnaphas@gmail.com> (https://github.com/douglasnaphas)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/douglasnaphas/aws-scripts/issues"
+  },
+  "homepage": "https://github.com/douglasnaphas/aws-scripts#readme",
+  "dependencies": {
+    "aws-sdk": "^2.476.0",
+    "jest": "^24.8.0"
+  }
+}
