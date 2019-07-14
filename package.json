@@ -23,6 +23,7 @@
   "dependencies": {
     "aws-sdk": "^2.476.0",
     "commander": "^2.20.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "lodash": ">=4.17.13"
   }
 }
