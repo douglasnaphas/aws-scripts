@@ -2,7 +2,7 @@
 
 KEYWORD=$1
 
-awk 'END {printf("%17s   %s   %s\n", "BYTES", "MAX_COST", "BUCKET")}'
+awk 'BEGIN {printf("%17s   %s   %s\n", "BYTES", "MAX_COST", "BUCKET")}'
 
 aws s3api list-buckets | \
   jq '.Buckets | map(select(.Name | test("'${KEYWORD}'")))[] | .Name' | \
