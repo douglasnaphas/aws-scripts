@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/douglasnaphas/aws-scripts#readme",
   "dependencies": {
-    "aws-sdk": "^2.476.0",
+    "aws-sdk": "^2.814.0",
     "commander": "^2.20.0",
     "jest": "^26.1.0",
     "lodash": "^4.17.19"
