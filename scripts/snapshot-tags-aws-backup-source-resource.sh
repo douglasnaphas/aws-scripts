@@ -49,5 +49,5 @@ done < <(echo "$aws_output" | jq -r '.[] | [
 
 # Output the snapshot ID, the source resource tag, and the volume ID
 for snapshot_id in "${snapshot_ids[@]}"; do
-    echo -e "$snapshot_id\t${source_resource_tags[$snapshot_id]}\t${volume_ids[$snapshot_id]}"
+    echo -e "${snapshot_id},${volume_ids[$snapshot_id]}"
 done
