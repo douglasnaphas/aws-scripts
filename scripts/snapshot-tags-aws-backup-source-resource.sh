@@ -16,8 +16,8 @@ fi
 aws_output=$(aws ec2 describe-snapshots --snapshot-ids "${snapshot_ids[@]}" \
     --query 'Snapshots[].{
         SnapshotId: SnapshotId,
-        SourceResource: Tags[?Key==`aws:backup:source-resource`]|[0].Value,
-        VolumeId: VolumeId
+        VolumeId: VolumeId,
+        SourceResource: Tags[?Key==`aws:backup:source-resource`]|[0].Value
     }' \
     --output json)
 
@@ -34,20 +34,20 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 # Create associative arrays to hold the mapping
-declare -A source_resource_tags
 declare -A volume_ids
+declare -A source_resource_tags
 
 # Populate the associative arrays
-while IFS=$'\t' read -r snapshot_id source_resource_tag volume_id; do
-    source_resource_tags["$snapshot_id"]="$source_resource_tag"
+while IFS=$'\t' read -r snapshot_id volume_id source_resource_tag; do
     volume_ids["$snapshot_id"]="$volume_id"
+    source_resource_tags["$snapshot_id"]="$source_resource_tag"
 done < <(echo "$aws_output" | jq -r '.[] | [
     .SnapshotId,
-    (.SourceResource // ""),
-    (.VolumeId // "")
+    (.VolumeId // ""),
+    (.SourceResource // "")
 ] | @tsv')
 
-# Output the snapshot ID, the source resource tag, and the volume ID
+# Output the snapshot ID, volume ID, and source resource tag (comma-separated)
 for snapshot_id in "${snapshot_ids[@]}"; do
-    echo -e "${snapshot_id},${volume_ids[$snapshot_id]}"
+    echo "${snapshot_id},${volume_ids[$snapshot_id]},${source_resource_tags[$snapshot_id]}"
 done
